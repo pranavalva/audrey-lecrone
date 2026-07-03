@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,6 +43,11 @@
 
   .section-heading {
     @apply font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-balance leading-tight;
+  }
+
+  .brand-logo {
+    font-family: 'Great Vibes', cursive;
+    letter-spacing: -0.015em;
   }
 
   .eyebrow {

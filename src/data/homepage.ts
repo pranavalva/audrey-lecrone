@@ -1,9 +1,10 @@
 import type { MethodPillar, PathCard } from './types';
 
 export const hero = {
-  headline: 'In the moments that matter most, sound fully alive.',
+  headline: 'DIALECT COACHING & SPEAKING SKILLS',
+  subheadline: 'Accents, Authenticity, Personality, & Presence',
   subhead:
-    'I coach actors, executives, and global professionals in dialect, accent, and communication—when the performance can\'t afford to be flat.',
+    'Helping actors, professionals, & organizations communicate when the performance can\'t afford to be flat.',
   portrait: '/images/hero-portrait.jpg',
   primaryCta: { label: 'Work with me', href: '/contact' },
   secondaryCta: { label: 'Explore Services', href: '#paths' },
@@ -16,6 +17,8 @@ export const promise = {
     'Dialect work isn\'t about sounding correct—it\'s about sounding alive. My award-winning approach blends technical precision with emotional truth, helping you sound natural, grounded, and fully embodied in high-stakes performances and conversations.',
     'Whether you\'re stepping into a role, stepping up to lead, or stepping onto a stage, I help you build the voice that meets the moment.',
   ],
+  image: '/images/kaluuya-oscar.jpg',
+  imageAlt: 'Daniel Kaluuya holding an Oscar',
 };
 
 export const pathCards: PathCard[] = [

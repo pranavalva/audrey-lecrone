@@ -7,14 +7,25 @@ import { promise } from '@/data/homepage';
 <section class="py-16 md:py-24">
   <div class="max-w-6xl mx-auto px-4 md:px-6">
     <ScrollReveal>
-      <SectionHeading
-        eyebrow={promise.eyebrow}
-        title={promise.headline}
-      />
-      <div class="mt-8 max-w-3xl space-y-4">
-        {promise.body.map((paragraph) => (
-          <p class="text-lg text-ink-muted leading-relaxed">{paragraph}</p>
-        ))}
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px] items-start">
+        <div>
+          <SectionHeading eyebrow={promise.eyebrow} title={promise.headline} />
+          <div class="mt-8 max-w-3xl space-y-4">
+            {promise.body.map((paragraph) => (
+              <p class="text-lg text-ink-muted leading-relaxed">{paragraph}</p>
+            ))}
+          </div>
+        </div>
+
+        {promise.image && (
+          <div class="rounded-[2rem] overflow-hidden border border-cream/10 shadow-xl bg-cream">
+            <img
+              src={promise.image}
+              alt={promise.imageAlt}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        )}
       </div>
     </ScrollReveal>
   </div>
