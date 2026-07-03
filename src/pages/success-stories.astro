@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import TestimonialCard from '@/components/ui/TestimonialCard.astro';
+import { testimonials } from '@/data/testimonials';
+---
+
+<BaseLayout
+  title="Success Stories"
+  description="Client testimonials from actors, executives, and organizations coached by Audrey LeCrone. Real experiences in their own words."
+  canonicalPath="/success-stories"
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <ScrollReveal>
+        <p class="eyebrow mb-4">Success Stories</p>
+        <h1 class="font-serif text-4xl md:text-5xl font-semibold text-ink mb-4 text-balance">
+          What clients say
+        </h1>
+        <p class="text-lg text-ink-muted leading-relaxed max-w-3xl mb-4">
+          In their own words—experiences from actors, executives, and teams Audrey has coached. These are testimonials, not a list of projects.
+        </p>
+        <p class="text-sm text-ink-muted mb-10">
+          Looking for project credits?{' '}
+          <a href="/credits" class="text-coral hover:underline">
+            View Portfolio →
+          </a>
+        </p>
+      </ScrollReveal>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        {testimonials.map((testimonial) => (
+          <ScrollReveal>
+            <TestimonialCard testimonial={testimonial} />
+          </ScrollReveal>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

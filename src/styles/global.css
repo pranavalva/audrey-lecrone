@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hero-mask {
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  }
+
+  .section-dark {
+    @apply bg-ink text-cream;
+  }
+
+  .section-heading {
+    @apply font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-balance leading-tight;
+  }
+
+  .eyebrow {
+    @apply text-gold text-xs md:text-sm font-sans font-semibold uppercase tracking-widest;
+  }
+}
+
+@layer utilities {
+  .scroll-reveal {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+
+  .scroll-reveal.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal {
+      @apply opacity-100 translate-y-0 transition-none;
+    }
+  }
+}

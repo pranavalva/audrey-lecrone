@@ -1,0 +1,199 @@
+---
+import { contact } from '@/data/contact';
+import { services } from '@/data/services';
+import { site, newsletterSignupUrl } from '@/data/site';
+
+const web3Key = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+---
+
+<form
+  id="contact-form"
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  class="space-y-5"
+>
+  {web3Key ? (
+    <input type="hidden" name="access_key" value={web3Key} />
+  ) : null}
+  <input type="hidden" name="subject" value="New inquiry from audreylecrone.com" />
+  <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+
+  <div>
+    <label for="name" class="block text-sm font-medium text-ink mb-1.5">
+      {contact.form.fields.name}
+    </label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      class="w-full min-h-[44px] px-4 py-2.5 rounded-xl border border-cream-deep bg-cream focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent transition"
+    />
+  </div>
+
+  <div>
+    <label for="email" class="block text-sm font-medium text-ink mb-1.5">
+      {contact.form.fields.email}
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      class="w-full min-h-[44px] px-4 py-2.5 rounded-xl border border-cream-deep bg-cream focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent transition"
+    />
+  </div>
+
+  <div>
+    <label for="location" class="block text-sm font-medium text-ink mb-1.5">
+      {contact.form.fields.location}
+    </label>
+    <input
+      type="text"
+      id="location"
+      name="location"
+      class="w-full min-h-[44px] px-4 py-2.5 rounded-xl border border-cream-deep bg-cream focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent transition"
+    />
+  </div>
+
+  <div>
+    <label for="service" class="block text-sm font-medium text-ink mb-1.5">
+      {contact.form.fields.service}
+    </label>
+    <select
+      id="service"
+      name="service"
+      class="w-full min-h-[44px] px-4 py-2.5 rounded-xl border border-cream-deep bg-cream focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent transition"
+    >
+      <option value="">Select a service (optional)</option>
+      {services.map((s) => (
+        <option value={`${s.audience}/${s.slug}`}>
+          {s.title} ({s.audience})
+        </option>
+      ))}
+      <option value="other">Other / Not sure yet</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="message" class="block text-sm font-medium text-ink mb-1.5">
+      {contact.form.fields.message}
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      required
+      class="w-full px-4 py-3 rounded-xl border border-cream-deep bg-cream focus:outline-none focus:ring-2 focus:ring-coral focus:border-transparent transition resize-y"
+    ></textarea>
+  </div>
+
+  <div class="flex items-start gap-3">
+    <input
+      type="checkbox"
+      id="newsletter"
+      name="newsletter"
+      value="yes"
+      class="mt-1 min-h-[20px] min-w-[20px] rounded border-cream-deep text-coral focus:ring-coral"
+    />
+    <label for="newsletter" class="text-sm text-ink-muted leading-relaxed">
+      {contact.form.newsletter.checkboxLabel}
+      {newsletterSignupUrl ? (
+        <>
+          {' '}
+          <a
+            href={newsletterSignupUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-coral font-medium hover:text-coral-hover underline underline-offset-2"
+          >
+            {contact.form.newsletter.linkLabel}
+          </a>
+        </>
+      ) : null}
+    </label>
+  </div>
+
+  <div id="form-status" class="hidden text-sm rounded-xl p-3" role="status"></div>
+
+  {!web3Key && (
+    <p class="text-sm text-ink-muted">
+      Form delivery is not configured. Please email{' '}
+      <a href={`mailto:${site.email}`} class="text-coral hover:underline">
+        {site.email}
+      </a>{' '}
+      directly.
+    </p>
+  )}
+
+  <button
+    type="submit"
+    class="w-full min-h-[44px] px-6 py-3 rounded-full bg-coral text-cream font-medium hover:bg-coral-hover shadow-pill transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral focus-visible:ring-offset-2"
+  >
+    {contact.form.submitLabel}
+  </button>
+</form>
+
+<script>
+  function initContactForm() {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    if (!form) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const from = params.get('from');
+    const service = params.get('service');
+    const serviceSelect = document.getElementById('service') as HTMLSelectElement | null;
+    const messageField = document.getElementById('message') as HTMLTextAreaElement | null;
+
+    if (serviceSelect && service) {
+      const value = from ? `${from}/${service}` : service;
+      const option = Array.from(serviceSelect.options).find((o) => o.value === value);
+      if (option) serviceSelect.value = value;
+    }
+
+    if (messageField && from && service) {
+      messageField.placeholder = `I'm interested in ${service.replace(/-/g, ' ')} coaching...`;
+    }
+
+    form.addEventListener('submit', async (e) => {
+      const key = form.querySelector<HTMLInputElement>('input[name="access_key"]');
+      if (!key?.value) return;
+
+      e.preventDefault();
+      const status = document.getElementById('form-status');
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+        });
+        const data = await response.json();
+
+        if (status) {
+          status.classList.remove('hidden', 'bg-coral/10', 'text-coral', 'bg-green-50', 'text-green-800');
+          if (data.success) {
+            status.classList.add('bg-green-50', 'text-green-800');
+            status.textContent = 'Thank you! Your message has been sent. I\'ll be in touch soon.';
+            form.reset();
+          } else {
+            status.classList.add('bg-coral/10', 'text-coral');
+            status.textContent = 'Something went wrong. Please try again or email directly.';
+          }
+        }
+      } catch {
+        if (status) {
+          status.classList.remove('hidden');
+          status.classList.add('bg-coral/10', 'text-coral');
+          status.textContent = 'Network error. Please try again or email directly.';
+        }
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:page-load', initContactForm);
+</script>

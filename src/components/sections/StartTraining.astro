@@ -1,0 +1,23 @@
+---
+import Button from '@/components/ui/Button.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { closingCta } from '@/data/homepage';
+---
+
+<section class="relative py-16 md:py-24 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-t from-coral/10 via-cream to-cream pointer-events-none" />
+  <div class="relative max-w-6xl mx-auto px-4 md:px-6 text-center">
+    <ScrollReveal>
+      <p class="eyebrow mb-4">{closingCta.eyebrow}</p>
+      <h2 class="font-serif text-4xl md:text-5xl font-semibold text-ink mb-4">
+        {closingCta.headline}
+      </h2>
+      <p class="text-lg text-ink-muted leading-relaxed max-w-2xl mx-auto mb-8">
+        {closingCta.body}
+      </p>
+      <Button href={closingCta.cta.href} fullWidth class="sm:w-auto sm:inline-flex">
+        {closingCta.cta.label}
+      </Button>
+    </ScrollReveal>
+  </div>
+</section>

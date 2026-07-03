@@ -1,0 +1,24 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ServicePage from '@/components/sections/ServicePage.astro';
+import { getAllServicePaths } from '@/data/services';
+import type { Service } from '@/data/types';
+
+export function getStaticPaths() {
+  return getAllServicePaths();
+}
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<BaseLayout
+  title={service.title}
+  description={service.summary}
+  canonicalPath={`/${service.audience}/${service.slug}`}
+>
+  <ServicePage service={service} />
+</BaseLayout>

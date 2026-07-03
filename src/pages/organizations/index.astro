@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHeader from '@/components/sections/PageHeader.astro';
+import AudienceOffers from '@/components/sections/AudienceOffers.astro';
+import CustomPrograms from '@/components/sections/CustomPrograms.astro';
+import { audienceMeta } from '@/data/site';
+import { getServicesByAudience } from '@/data/services';
+
+const services = getServicesByAudience('organizations');
+const meta = audienceMeta.organizations;
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  canonicalPath="/organizations"
+>
+  <PageHeader title={meta.title} intro={meta.intro} image={meta.headerImage} />
+  <AudienceOffers services={services} />
+  <CustomPrograms />
+</BaseLayout>

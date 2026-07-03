@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ContactForm from '@/components/ui/ContactForm.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { contact } from '@/data/contact';
+import { site } from '@/data/site';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Get in touch with Audrey LeCrone for dialect and communication coaching. Start a conversation—no online booking, just a warm hello."
+  canonicalPath="/contact"
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-10">
+        <ScrollReveal>
+          <h1 class="font-serif text-4xl md:text-5xl font-semibold text-ink mb-4 text-balance">
+            {contact.headline}
+          </h1>
+          <p class="text-lg text-ink-muted leading-relaxed mb-6">
+            {contact.subhead}
+          </p>
+          <ul class="space-y-2">
+            {contact.personality.map((line) => (
+              <li class="flex gap-2 text-ink-muted">
+                <span class="text-coral">♥</span>
+                <span>{line}</span>
+              </li>
+            ))}
+          </ul>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <div class="p-6 md:p-8 bg-cream-deep/50 rounded-2xl border border-cream-deep h-fit">
+            <h2 class="font-serif text-2xl font-semibold text-ink mb-3">
+              {contact.emailCard.title}
+            </h2>
+            <p class="text-ink-muted mb-4">{contact.emailCard.body}</p>
+            <a
+              href={`mailto:${site.email}`}
+              class="inline-flex items-center min-h-[44px] text-coral font-medium text-lg hover:text-coral-hover transition-colors"
+            >
+              {site.email}
+            </a>
+            <p class="text-sm text-ink-muted mt-6 pt-6 border-t border-cream-deep">
+              {contact.noBookingNote}
+            </p>
+          </div>
+        </ScrollReveal>
+      </div>
+
+      <ScrollReveal>
+        <div class="p-6 md:p-8 bg-cream rounded-2xl border border-cream-deep shadow-card">
+          <h2 class="font-serif text-2xl font-semibold text-ink mb-6">
+            {contact.form.title}
+          </h2>
+          <ContactForm />
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</BaseLayout>

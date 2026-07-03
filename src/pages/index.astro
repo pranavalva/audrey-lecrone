@@ -1,0 +1,27 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Hero from '@/components/sections/Hero.astro';
+import CredibilityStrip from '@/components/sections/CredibilityStrip.astro';
+import Promise from '@/components/sections/Promise.astro';
+import PathCards from '@/components/sections/PathCards.astro';
+import Method from '@/components/sections/Method.astro';
+import SelectedCredits from '@/components/sections/SelectedCredits.astro';
+import Testimonials from '@/components/sections/Testimonials.astro';
+import StartTraining from '@/components/sections/StartTraining.astro';
+import { seo } from '@/data/site';
+---
+
+<BaseLayout
+  title="Dialect & Communication Coaching"
+  description={seo.defaultDescription}
+  canonicalPath="/"
+>
+  <Hero />
+  <CredibilityStrip />
+  <Promise />
+  <PathCards />
+  <Method />
+  <SelectedCredits />
+  <Testimonials />
+  <StartTraining />
+</BaseLayout>

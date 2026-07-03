@@ -1,0 +1,30 @@
+---
+import PlaceholderImage from './PlaceholderImage.astro';
+import type { Testimonial } from '@/data/types';
+
+interface Props {
+  testimonial: Testimonial;
+}
+
+const { testimonial } = Astro.props;
+---
+
+<article class="flex flex-col h-full p-6 md:p-8 bg-cream rounded-2xl border border-cream-deep shadow-card">
+  <div class="flex items-center gap-4 mb-6">
+    <PlaceholderImage
+      src={testimonial.image}
+      alt={testimonial.name}
+      aspect="square"
+      class="w-16 h-16 rounded-full shrink-0"
+    />
+    <div>
+      <p class="font-semibold text-ink">{testimonial.name}</p>
+      <p class="text-sm text-ink-muted">{testimonial.role}</p>
+    </div>
+  </div>
+  <blockquote class="flex-1">
+    <p class="text-ink-muted leading-relaxed text-lg font-serif italic">
+      "{testimonial.quote}"
+    </p>
+  </blockquote>
+</article>

@@ -1,0 +1,22 @@
+---
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { trustStats } from '@/data/site';
+---
+
+<section class="section-dark py-12 md:py-16">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <ScrollReveal>
+      <p class="eyebrow text-center mb-8">Trusted by</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        {trustStats.map((stat) => (
+          <div class="text-center">
+            <p class="font-serif text-2xl md:text-3xl font-semibold text-coral mb-1">
+              {stat.value}
+            </p>
+            <p class="text-sm text-cream/70">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+    </ScrollReveal>
+  </div>
+</section>

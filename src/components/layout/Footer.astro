@@ -1,0 +1,49 @@
+---
+import { footerNav, site } from '@/data/site';
+---
+
+<footer class="section-dark mt-auto">
+  <div class="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-10" />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-10">
+      <div>
+        <p class="font-serif text-2xl font-semibold text-cream mb-3">{site.name}</p>
+        <p class="text-cream/70 text-sm leading-relaxed max-w-sm">
+          {site.tagline}
+        </p>
+      </div>
+
+      <nav aria-label="Footer navigation">
+        <ul class="flex flex-col gap-3">
+          {footerNav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="min-h-[44px] inline-flex items-center text-cream/80 hover:text-gold transition-colors"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href={`mailto:${site.email}`}
+              class="min-h-[44px] inline-flex items-center text-gold hover:text-cream transition-colors"
+            >
+              {site.email}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <p class="text-xs text-cream/50 border-t border-cream/10 pt-6">
+      Portfolio shows work coached · Success Stories share client voices
+    </p>
+
+    <p class="text-xs text-cream/40 mt-2">
+      © {new Date().getFullYear()} {site.name}. All rights reserved.
+    </p>
+  </div>
+</footer>

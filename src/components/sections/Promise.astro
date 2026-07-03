@@ -1,0 +1,21 @@
+---
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { promise } from '@/data/homepage';
+---
+
+<section class="py-16 md:py-24">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <ScrollReveal>
+      <SectionHeading
+        eyebrow={promise.eyebrow}
+        title={promise.headline}
+      />
+      <div class="mt-8 max-w-3xl space-y-4">
+        {promise.body.map((paragraph) => (
+          <p class="text-lg text-ink-muted leading-relaxed">{paragraph}</p>
+        ))}
+      </div>
+    </ScrollReveal>
+  </div>
+</section>

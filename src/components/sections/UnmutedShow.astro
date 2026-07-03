@@ -1,0 +1,68 @@
+---
+import Button from '@/components/ui/Button.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { about } from '@/data/about';
+
+const { unmutedShow } = about;
+---
+
+<section class="relative w-full min-h-[70vh] md:min-h-[85vh] overflow-hidden bg-ink">
+  <video
+    id="unmuted-show-video"
+    class="absolute inset-0 w-full h-full object-cover"
+    autoplay
+    loop
+    muted
+    playsinline
+    poster={unmutedShow.poster}
+    aria-label={`${unmutedShow.title} preview`}
+  >
+    <source src={unmutedShow.video} type="video/mp4" />
+  </video>
+
+  <div
+    id="unmuted-show-fallback"
+    class="absolute inset-0 flex items-center justify-center bg-ink"
+    aria-hidden="true"
+  >
+    <p class="text-cream/40 text-sm uppercase tracking-widest px-4 text-center">
+      Add looping video at {unmutedShow.video}
+    </p>
+  </div>
+
+  <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent pointer-events-none" />
+
+  <div class="relative z-10 flex flex-col justify-end min-h-[70vh] md:min-h-[85vh] max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
+    <ScrollReveal>
+      <p class="eyebrow mb-4">Podcast</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-semibold text-cream mb-4 text-balance">
+        {unmutedShow.title}
+      </h2>
+      <p class="text-base text-cream/80 leading-relaxed max-w-2xl mb-8">
+        {unmutedShow.description}
+      </p>
+      <Button href={unmutedShow.href} variant="primary">
+        {unmutedShow.cta}
+      </Button>
+    </ScrollReveal>
+  </div>
+</section>
+
+<script>
+  function initUnmutedVideo() {
+    const video = document.getElementById('unmuted-show-video') as HTMLVideoElement | null;
+    const fallback = document.getElementById('unmuted-show-fallback');
+    if (!video || !fallback) return;
+
+    const showVideo = () => fallback.classList.add('hidden');
+
+    video.addEventListener('loadeddata', showVideo);
+    video.addEventListener('canplay', showVideo);
+    video.addEventListener('error', () => fallback.classList.remove('hidden'));
+
+    if (video.readyState >= 2) showVideo();
+  }
+
+  initUnmutedVideo();
+  document.addEventListener('astro:page-load', initUnmutedVideo);
+</script>

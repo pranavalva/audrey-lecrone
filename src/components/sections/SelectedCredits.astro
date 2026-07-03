@@ -1,0 +1,33 @@
+---
+import Button from '@/components/ui/Button.astro';
+import CreditCard from '@/components/ui/CreditCard.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { featuredCredits } from '@/data/credits';
+---
+
+<section class="py-16 md:py-24">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <ScrollReveal>
+      <SectionHeading
+        eyebrow="Portfolio"
+        title="Selected work"
+        subhead="A selection of film and television projects I've coached—not client testimonials."
+      />
+    </ScrollReveal>
+
+    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {featuredCredits.map((credit) => (
+        <ScrollReveal>
+          <CreditCard credit={credit} />
+        </ScrollReveal>
+      ))}
+    </div>
+
+    <ScrollReveal class="mt-10 text-center">
+      <Button href="/credits" variant="secondary">
+        View full portfolio
+      </Button>
+    </ScrollReveal>
+  </div>
+</section>

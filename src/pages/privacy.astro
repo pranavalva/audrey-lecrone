@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import { site } from '@/data/site';
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Privacy policy for audreylecrone.com. How we handle contact form data and your information."
+  canonicalPath="/privacy"
+>
+  <section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <ScrollReveal>
+        <h1 class="font-serif text-4xl md:text-5xl font-semibold text-ink mb-8">
+          Privacy Policy
+        </h1>
+
+        <div class="prose prose-lg text-ink-muted space-y-6">
+          <p>
+            This privacy policy explains how {site.name} ("we," "us") collects and uses information when you visit audreylecrone.com or submit the contact form.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">Information we collect</h2>
+          <p>
+            When you use our contact form, we collect the information you provide: your name, email address, location (if provided), service interest, and message content.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">How we use your information</h2>
+          <p>
+            We use your contact information solely to respond to your inquiry and discuss potential coaching engagements. We do not sell, rent, or share your personal information with third parties for marketing purposes.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">Form processing</h2>
+          <p>
+            Contact form submissions are processed through Web3Forms, a third-party form delivery service. Data transmitted through the form is subject to Web3Forms' privacy practices. Form data is delivered to {site.email}.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">Cookies and analytics</h2>
+          <p>
+            This site does not use tracking cookies or third-party analytics in v1. If this changes, this policy will be updated.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">Data retention</h2>
+          <p>
+            We retain contact form correspondence as long as needed to respond to your inquiry and maintain our coaching relationship records. You may request deletion of your data at any time.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">Your rights</h2>
+          <p>
+            You may request access to, correction of, or deletion of your personal information by contacting us at{' '}
+            <a href={`mailto:${site.email}`} class="text-coral hover:underline">{site.email}</a>.
+          </p>
+
+          <h2 class="font-serif text-2xl font-semibold text-ink">Changes</h2>
+          <p>
+            We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date.
+          </p>
+
+          <p class="text-sm text-ink-muted/70 pt-4">
+            Last updated: July 2026
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</BaseLayout>

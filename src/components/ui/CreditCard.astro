@@ -1,0 +1,27 @@
+---
+import PlaceholderImage from './PlaceholderImage.astro';
+import type { Credit } from '@/data/types';
+
+interface Props {
+  credit: Credit;
+}
+
+const { credit } = Astro.props;
+---
+
+<article class="group overflow-hidden rounded-2xl bg-cream border border-cream-deep shadow-card hover:shadow-lg transition-shadow duration-300">
+  <PlaceholderImage
+    src={credit.image}
+    alt={`${credit.title} — coached ${credit.clientName}`}
+    aspect="video"
+    class="group-hover:scale-[1.02] transition-transform duration-500"
+  />
+  <div class="p-5 md:p-6">
+    <p class="eyebrow mb-2">Portfolio</p>
+    <h3 class="font-serif text-xl font-semibold text-ink mb-1">{credit.title}</h3>
+    <p class="text-sm text-ink-muted">
+      <span class="text-gold font-medium">{credit.projectType}</span>
+      {credit.clientName && <> · {credit.clientName}</>}
+    </p>
+  </div>
+</article>

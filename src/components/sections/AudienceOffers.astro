@@ -1,0 +1,32 @@
+---
+import OfferCard from '@/components/ui/OfferCard.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import ScrollReveal from '@/components/ui/ScrollReveal.astro';
+import type { Service } from '@/data/types';
+
+interface Props {
+  services: Service[];
+}
+
+const { services } = Astro.props;
+---
+
+<section class="py-16 md:py-24 bg-cream-deep/30">
+  <div class="max-w-6xl mx-auto px-4 md:px-6">
+    <ScrollReveal>
+      <SectionHeading
+        eyebrow="Ways to work together"
+        title="Find your fit"
+        subhead="Each offering has its own page with details—explore what resonates, then start a conversation."
+      />
+    </ScrollReveal>
+
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      {services.map((service) => (
+        <ScrollReveal>
+          <OfferCard service={service} />
+        </ScrollReveal>
+      ))}
+    </div>
+  </div>
+</section>
