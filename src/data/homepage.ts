@@ -1,11 +1,10 @@
 import type { MethodPillar, PathCard } from './types';
 
 export const hero = {
-  headline: 'DIALECT COACHING & SPEAKING SKILLS',
-  subheadline: 'Accents, Authenticity, Personality, & Presence',
+  headline: 'Accents & Authenticity, Personality & Presence',
   subhead:
     'Helping actors, professionals, & organizations communicate when the performance can\'t afford to be flat.',
-  portrait: '/images/hero-portrait.jpg',
+  portrait: '/images/hero-portrait.png',
   primaryCta: { label: 'Work with me', href: '/contact' },
   secondaryCta: { label: 'Explore Services', href: '#paths' },
 };
